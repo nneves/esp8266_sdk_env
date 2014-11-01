@@ -1,14 +1,17 @@
 #!/bin/bash
 
 username=$USER
-echo $username
+currdir=`pwd`
+
+echo "USERNAME="$username
+echo "DIR="$currdir
 
 trap "exit" SIGHUP SIGINT SIGTERM
 
 echo "-----------------------------------------------------------"
 echo " ESP8266 Setup Environment Script!"
 
-#if [ -f "dummy.txt" ]; then
+if ! [ -f "sdk.txt" ]; then
 # ****************************************************************
 # Building the toolchain
 # source: https://github.com/esp8266/esp8266-wiki/wiki/Toolchain#building-the-toolchain
@@ -124,7 +127,8 @@ cd /opt/Espressif
 git clone https://github.com/themadinventor/esptool esptool-py
 sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
 
-#fi
+echo "done" > $currdir/sdk.txt
+fi
 # ****************************************************************
 # Cross-Compile OLIMEX demo code
 # source: https://olimex.wordpress.com/2015/01/29/esp8266-building-hello-world-blink-led-and-simple-web-server-to-drive-the-relay-and-check-button-status/
@@ -140,16 +144,16 @@ git clone https://github.com/OLIMEX/ESP8266.git
 cd  /opt/Espressif/ESP8266
 git submodule init
 git submodule update
-cp -r ./ESP8266-EVB-blinkLED/lib/heatshrink ./esphttpd/lib/.
+cp -R esphttpd/lib/ ESP8266-EVB-blinkLED/lib/
 
 echo "-----------------------------------------------------------"
 echo "-> ESP Blink Led"
 echo "-----------------------------------------------------------"
 cd /opt/Espressif/ESP8266/ESP8266-EVB-blinkLED
-make
+make clean all
 
 echo "-----------------------------------------------------------"
 echo "-> ESP HTTPD"
 echo "-----------------------------------------------------------"
 cd  /opt/Espressif/ESP8266/esphttpd
-make
+make clean all
