@@ -56,6 +56,7 @@ then
   echo "" >> ~/.bashrc
   echo 'export PATH=$PATH:'$xtpath >> ~/.bashrc
   source ~/.bashrc
+  exec bash
 
   echo "PATH After source: "$PATH
 else
