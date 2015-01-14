@@ -110,5 +110,15 @@ wget -O include.tgz https://github.com/esp8266/esp8266-wiki/raw/master/include.t
 tar -xvzf include.tgz
 
 echo "-----------------------------------------------------------"
-echo "Installing the ESP image tool"
-# ... TODO ...
+echo "» Installing the ESP image tool"
+
+cd /opt/Espressif
+wget -O esptool_0.0.2-1_i386.deb https://github.com/esp8266/esp8266-wiki/raw/master/deb/esptool_0.0.2-1_i386.deb
+dpkg -i esptool_0.0.2-1_i386.deb
+
+echo "-----------------------------------------------------------"
+echo "» Installing the ESP upload tool"
+
+cd /opt/Espressif
+git clone https://github.com/themadinventor/esptool esptool-py
+sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
