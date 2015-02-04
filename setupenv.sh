@@ -8,7 +8,7 @@ trap "exit" SIGHUP SIGINT SIGTERM
 echo "-----------------------------------------------------------"
 echo " ESP8266 Setup Environment Script!"
 
-if [ -f "dummy.txt" ]; then
+#if [ -f "dummy.txt" ]; then
 
 # ****************************************************************
 # Building the toolchain
@@ -73,7 +73,7 @@ else
   echo "CT-NG tool location already set in ~/.bashrc"
 fi
 
-fi
+#fi
 # ****************************************************************
 # Setting up the Espressif SDK
 # source: https://github.com/esp8266/esp8266-wiki/wiki/Toolchain#setting-up-the-espressif-sdk
@@ -117,7 +117,7 @@ echo "» Installing the ESP image tool"
 
 cd /opt/Espressif
 wget -O esptool_0.0.2-1_i386.deb https://github.com/esp8266/esp8266-wiki/raw/master/deb/esptool_0.0.2-1_i386.deb
-dpkg -i esptool_0.0.2-1_i386.deb
+sudo dpkg -i esptool_0.0.2-1_i386.deb
 
 echo "-----------------------------------------------------------"
 echo "» Installing the ESP upload tool"
