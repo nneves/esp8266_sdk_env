@@ -17,7 +17,10 @@ if [ -f "dummy.txt" ]; then
 
 echo "-----------------------------------------------------------"
 echo "» Install Linux Debian depencies"
+# Debian
 sudo apt-get install -y git autoconf build-essential gperf bison flex texinfo libtool libncurses5-dev wget gawk libc6-dev python-serial libexpat1-dev
+# Ubuntu
+#sudo apt-get install -y git autoconf build-essential gperf bison flex texinfo libtool libncurses5-dev wget gawk libc6-dev-amd64 python-serial libexpat-dev
 
 echo "-----------------------------------------------------------"
 echo "» Create /opt/Espressif dir"
@@ -88,7 +91,7 @@ wget -O esp_iot_sdk_v0.9.3_14_11_21_patch1.zip https://github.com/esp8266/esp826
 unzip -o esp_iot_sdk_v0.9.3_14_11_21.zip
 unzip -o esp_iot_sdk_v0.9.3_14_11_21_patch1.zip
 mv esp_iot_sdk_v0.9.3 ESP8266_SDK
-mv License ESP8266_SDK/
+mv License ESP8266_SDK/esp_iot_sdk_v0.9.3
 rm esp_iot_sdk_v0.9.3_14_11_21_patch1.zip
 rm esp_iot_sdk_v0.9.3_14_11_21.zip
 
@@ -122,3 +125,17 @@ echo "» Installing the ESP upload tool"
 cd /opt/Espressif
 git clone https://github.com/themadinventor/esptool esptool-py
 sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
+
+
+# ****************************************************************
+# Cross-Compile OLIMEX demo code
+# source: https://olimex.wordpress.com/2015/01/29/esp8266-building-hello-world-blink-led-and-simple-web-server-to-drive-the-relay-and-check-button-status/
+# ****************************************************************
+
+echo "-----------------------------------------------------------"
+echo "» Cross-Compile Olimex Blink Led demo"
+
+cd /opt/Espressif
+git clone https://github.com/OLIMEX/ESP8266.git
+cd ESP8266-EVB-blinkLED
+make
