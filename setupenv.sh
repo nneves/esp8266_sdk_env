@@ -135,7 +135,13 @@ sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
 echo "-----------------------------------------------------------"
 echo "» Cross-Compile Olimex Blink Led demo"
 
+echo "-> ESP Blink Led"
 cd /opt/Espressif
 git clone https://github.com/OLIMEX/ESP8266.git
 cd ESP8266-EVB-blinkLED
+make
+
+echo "-> ESP HTTPD"
+cd /opt/Espressif
+cd ESP8266/esphttpd
 make
