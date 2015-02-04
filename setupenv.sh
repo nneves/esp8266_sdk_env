@@ -73,7 +73,6 @@ else
   echo "CT-NG tool location already set in ~/.bashrc"
 fi
 
-#fi
 # ****************************************************************
 # Setting up the Espressif SDK
 # source: https://github.com/esp8266/esp8266-wiki/wiki/Toolchain#setting-up-the-espressif-sdk
@@ -126,7 +125,7 @@ cd /opt/Espressif
 git clone https://github.com/themadinventor/esptool esptool-py
 sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
 
-
+#fi
 # ****************************************************************
 # Cross-Compile OLIMEX demo code
 # source: https://olimex.wordpress.com/2015/01/29/esp8266-building-hello-world-blink-led-and-simple-web-server-to-drive-the-relay-and-check-button-status/
@@ -138,7 +137,7 @@ echo "» Cross-Compile Olimex Blink Led demo"
 echo "-> ESP Blink Led"
 cd /opt/Espressif
 git clone https://github.com/OLIMEX/ESP8266.git
-cd ESP8266-EVB-blinkLED
+cd ESP8266/ESP8266-EVB-blinkLED
 make
 
 echo "-> ESP HTTPD"
