@@ -9,7 +9,6 @@ echo "-----------------------------------------------------------"
 echo " ESP8266 Setup Environment Script!"
 
 #if [ -f "dummy.txt" ]; then
-
 # ****************************************************************
 # Building the toolchain
 # source: https://github.com/esp8266/esp8266-wiki/wiki/Toolchain#building-the-toolchain
@@ -134,13 +133,23 @@ sudo ln -s $PWD/esptool-py/esptool.py crosstool-NG/builds/xtensa-lx106-elf/bin/
 echo "-----------------------------------------------------------"
 echo "» Cross-Compile Olimex Blink Led demo"
 
-echo "-> ESP Blink Led"
+echo "clone git repository and sync submodule/libs/deps"
 cd /opt/Espressif
 git clone https://github.com/OLIMEX/ESP8266.git
-cd ESP8266/ESP8266-EVB-blinkLED
+
+cd  /opt/Espressif/ESP8266
+git submodule init
+git submodule update
+cp -r ./ESP8266-EVB-blinkLED/lib/heatshrink ./esphttpd/lib/.
+
+echo "-----------------------------------------------------------"
+echo "-> ESP Blink Led"
+echo "-----------------------------------------------------------"
+cd /opt/Espressif/ESP8266/ESP8266-EVB-blinkLED
 make
 
+echo "-----------------------------------------------------------"
 echo "-> ESP HTTPD"
-cd /opt/Espressif
-cd ESP8266/esphttpd
+echo "-----------------------------------------------------------"
+cd  /opt/Espressif/ESP8266/esphttpd
 make
